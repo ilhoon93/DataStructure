@@ -117,7 +117,7 @@ public class Pr1 {
         }
     }
 
-    /* 하나 빼기 */
+    /* 1.5 하나 빼기 */
     public boolean pr5(String str1, String str2){
         int str1N = str1.length();
         int str2N = str2.length();
@@ -157,7 +157,11 @@ public class Pr1 {
                 int flag = 0;
                 for (int i = 0; i<str1N; i++){
                     if (flag == 0){
-                        if(s[i] != l[i]){
+                        if (i == s.length){
+                            System.out.println("편집횟수 1회로 가능");
+                            return true;
+                        }
+                        if(s[i] != l[i]){ // 문자열의 마지막 글자가 달라지는 경우... 검증을 못함
                             flag = 1;
                         }
                     }
@@ -172,5 +176,101 @@ public class Pr1 {
                 return true;
             }
         }
+    }
+
+    /* 1.6 문자열 압축 */
+    public String pr6(String str){
+        String result = "";
+        char[] strToChar = str.toCharArray();
+        char s = strToChar[0];
+        int cnt = 1;
+        for (int i=1; i<str.length(); i++){
+            if (s==strToChar[i]){
+                cnt++;
+            }
+            else{
+                result = result + s + Integer.toString(cnt);
+                cnt = 1;
+            }
+            s = strToChar[i];
+        }
+        result = result + s + Integer.toString(cnt);
+        if(result.length() > str.length()){
+            result = str;
+        }
+        return result;
+    }
+
+    /* 1.7 행렬 회전 */
+    public void pr7(int [][] data){
+        int n = data[0].length;
+        int[][] result = new int[n][n];
+
+        for (int i=0; i<n;i++){
+            for (int j=0; j<n; j++){
+                result[j][n-i-1] = data[i][j];
+            }
+        }
+
+
+        for (int i=0; i<n;i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(result[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    /* 1.8 0 행렬 */
+    public void pr8(int [][] data){
+        int m = data.length;
+        int n = data[0].length;
+
+        int X = 0;
+        int Y = 0;
+        int flag = 0;
+        for (int i=0; i<m; i++){
+            for (int j=0; j<n; j++){
+                if (data[i][j] == 0){
+                    X=i;
+                    Y=j;
+                    flag = 1;
+                    break;
+                }
+            }
+        }
+        if (flag == 1){
+            for (int i=0; i<m; i++){
+                data[i][Y] = 0;
+            }
+            for (int j=0; j<n; j++) {
+                data[X][j] = 0;
+            }
+        }
+
+        for (int i=0; i<m; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(data[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    /* 1.9 문자열 회전 */
+    public boolean pr9(String str1, String str2){
+        char [] str1ToChar = str1.toCharArray();
+        char [] str2ToChar = str2.toCharArray();
+        Arrays.sort(str1ToChar);
+        Arrays.sort(str2ToChar);
+
+        /*
+        if (str1.isSubString(str2)){
+            return true;
+        }
+        else{
+            return false;
+        }
+        */
+        return true;
     }
 }
